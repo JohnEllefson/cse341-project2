@@ -1,0 +1,183 @@
+##############################################################
+// Local host: request all armies
+GET http://localhost:8080/armies/ HTTP/1.1
+
+
+
+##############################################################
+// Local host: request Marro Hive army
+GET http://localhost:8080/armies/679ff3933d1717094be2c636 HTTP/1.1
+
+
+
+##############################################################
+// Local host: create a new army
+POST http://localhost:8080/armies HTTP/1.1
+content-type: application/json
+
+{
+  "name": "TEST Marro Hive BIGGER",
+  "type": "Unique Hero",
+  "general": "679fc5993d1717094be2c5ac",
+  "attack": 16,
+  "defense": 10,
+  "move": 11,
+  "range": 11,
+  "life": 12,
+  "cost": 260,
+  "specialPowers": "HIVE MIND: After Revealing an order marker on this Army Card, you may take a turn with any small or medium Common Marro Squad you control before taking a turn with Marro Hive. Any figure that is taking a turn must be within 12 clear sight spaces of Marro Hive prior to its movement. MARRO REBIRTH: After taking a turn with Marro Hive, you may roll the 20-sided die. If you roll a 13 or higher, you may place any previously destroyed Common Marro Squad figure from your army on an empty space adjacent to Marro Hive.",
+  "class": "Hive",
+  "species": "Marro",
+  "personality": "Terrifying",
+  "size": "Ultra Huge",
+  "height": 20,
+  "url": "https://www.heroscapers.com/community/showthread.php?t=11813",
+  "wave": "679fc69d3d1717094be2c5be"
+}
+
+
+
+##############################################################
+// Local host: request all armies to show that TEST Marro Hive BIGGER was added
+GET http://localhost:8080/armies/ HTTP/1.1
+
+
+
+##############################################################
+// Local host: update the TEST Marro Hive BIGGER army to make it smaller
+PUT http://localhost:8080/armies/67a16226fae8c49f736ba2f2 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "TEST Marro Hive SMALLER",
+    "type": "Unique Hero",
+    "general": "679fc5993d1717094be2c5ac",
+    "attack": 2,
+    "defense": 1,
+    "move": 0,
+    "range": 1,
+    "life": 2,
+    "cost": 35,
+    "specialPowers": "HIVE MIND: After Revealing an order marker on this Army Card, you may take a turn with any small or medium Common Marro Squad you control before taking a turn with Marro Hive. Any figure that is taking a turn must be within 12 clear sight spaces of Marro Hive prior to its movement. MARRO REBIRTH: After taking a turn with Marro Hive, you may roll the 20-sided die. If you roll a 13 or higher, you may place any previously destroyed Common Marro Squad figure from your army on an empty space adjacent to Marro Hive.",
+    "class": "Hive",
+    "species": "Marro",
+    "personality": "Terrifying",
+    "size": "Small",
+    "height": 3,
+    "url": "https://www.heroscapers.com/community/showthread.php?t=11813",
+    "wave": "679fc69d3d1717094be2c5be"
+}
+
+
+
+##############################################################
+// Local host: request all contacts to show that TEST Marro Hive BIGGER was updated to be smaller
+GET http://localhost:8080/armies/ HTTP/1.1
+
+
+
+##############################################################
+// Local host: delete the TEST Marro Hive SMALLER army
+DELETE http://localhost:8080/armies/67a16226fae8c49f736ba2f2 HTTP/1.1
+
+
+
+##############################################################
+// Local host: request all contacts to show that TEST Marro Hive SMALLER was deleted
+GET http://localhost:8080/armies/ HTTP/1.1
+
+
+
+// ************************************************************************************************
+###################################################################################################
+###################################################################################################
+###################################################################################################
+// ************************************************************************************************
+
+
+// Remote host: request all armies
+GET https://cse341-project2-t7en.onrender.com/armies/ HTTP/1.1
+
+
+
+##############################################################
+// Remote host: request Marro Hive army
+GET https://cse341-project2-t7en.onrender.com/armies/679ff3933d1717094be2c636 HTTP/1.1
+
+
+
+##############################################################
+// Remote host: create a new army
+POST https://cse341-project2-t7en.onrender.com/armies HTTP/1.1
+content-type: application/json
+
+{
+  "name": "TEST Marro Hive BIGGER",
+  "type": "Unique Hero",
+  "general": "679fc5993d1717094be2c5ac",
+  "attack": 16,
+  "defense": 10,
+  "move": 11,
+  "range": 11,
+  "life": 12,
+  "cost": 260,
+  "specialPowers": "HIVE MIND: After Revealing an order marker on this Army Card, you may take a turn with any small or medium Common Marro Squad you control before taking a turn with Marro Hive. Any figure that is taking a turn must be within 12 clear sight spaces of Marro Hive prior to its movement. MARRO REBIRTH: After taking a turn with Marro Hive, you may roll the 20-sided die. If you roll a 13 or higher, you may place any previously destroyed Common Marro Squad figure from your army on an empty space adjacent to Marro Hive.",
+  "class": "Hive",
+  "species": "Marro",
+  "personality": "Terrifying",
+  "size": "Ultra Huge",
+  "height": 20,
+  "url": "https://www.heroscapers.com/community/showthread.php?t=11813",
+  "wave": "679fc69d3d1717094be2c5be"
+}
+
+
+
+##############################################################
+// Remote host: request all armies to show that TEST Marro Hive BIGGER was added
+GET https://cse341-project2-t7en.onrender.com/armies/ HTTP/1.1
+
+
+
+##############################################################
+// Remote host: update the TEST Marro Hive BIGGER army to make it smaller
+PUT https://cse341-project2-t7en.onrender.com/armies/67a1301134cc079c3e10ceb9 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "TEST Marro Hive SMALLER",
+    "type": "Unique Hero",
+    "general": "679fc5993d1717094be2c5ac",
+    "attack": 2,
+    "defense": 1,
+    "move": 0,
+    "range": 1,
+    "life": 2,
+    "cost": 35,
+    "specialPowers": "HIVE MIND: After Revealing an order marker on this Army Card, you may take a turn with any small or medium Common Marro Squad you control before taking a turn with Marro Hive. Any figure that is taking a turn must be within 12 clear sight spaces of Marro Hive prior to its movement. MARRO REBIRTH: After taking a turn with Marro Hive, you may roll the 20-sided die. If you roll a 13 or higher, you may place any previously destroyed Common Marro Squad figure from your army on an empty space adjacent to Marro Hive.",
+    "class": "Hive",
+    "species": "Marro",
+    "personality": "Terrifying",
+    "size": "Small",
+    "height": 3,
+    "url": "https://www.heroscapers.com/community/showthread.php?t=11813",
+    "wave": "679fc69d3d1717094be2c5be"
+}
+
+
+
+##############################################################
+// Remote host: request all contacts to show that TEST Marro Hive BIGGER was updated to be smaller
+GET https://cse341-project2-t7en.onrender.com/armies/ HTTP/1.1
+
+
+
+##############################################################
+// Remote host: delete the TEST Marro Hive SMALLER army
+DELETE https://cse341-project2-t7en.onrender.com/armies/67a1301134cc079c3e10ceb9 HTTP/1.1
+
+
+
+##############################################################
+// Remote host: request all contacts to show that TEST Marro Hive SMALLER was deleted
+GET https://cse341-project2-t7en.onrender.com/armies/ HTTP/1.1

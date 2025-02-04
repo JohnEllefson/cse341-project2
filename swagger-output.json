@@ -1,0 +1,304 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "HeroScape API",
+    "description": "This API manages a database of HeroScape figures and their associated data."
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/armies/": {
+      "get": {
+        "description": "Return all armies in the database.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new army in the database.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "general": {
+                  "example": "any"
+                },
+                "attack": {
+                  "example": "any"
+                },
+                "defense": {
+                  "example": "any"
+                },
+                "move": {
+                  "example": "any"
+                },
+                "range": {
+                  "example": "any"
+                },
+                "life": {
+                  "example": "any"
+                },
+                "cost": {
+                  "example": "any"
+                },
+                "specialPowers": {
+                  "example": "any"
+                },
+                "class": {
+                  "example": "any"
+                },
+                "species": {
+                  "example": "any"
+                },
+                "personality": {
+                  "example": "any"
+                },
+                "size": {
+                  "example": "any"
+                },
+                "height": {
+                  "example": "any"
+                },
+                "url": {
+                  "example": "any"
+                },
+                "wave": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/armies/{id}": {
+      "get": {
+        "description": "Return a single army by ID from the database.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a single army by ID from the database.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "description": "Update a single army by ID in the database.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "general": {
+                  "example": "any"
+                },
+                "attack": {
+                  "example": "any"
+                },
+                "defense": {
+                  "example": "any"
+                },
+                "move": {
+                  "example": "any"
+                },
+                "range": {
+                  "example": "any"
+                },
+                "life": {
+                  "example": "any"
+                },
+                "cost": {
+                  "example": "any"
+                },
+                "specialPowers": {
+                  "example": "any"
+                },
+                "class": {
+                  "example": "any"
+                },
+                "species": {
+                  "example": "any"
+                },
+                "personality": {
+                  "example": "any"
+                },
+                "size": {
+                  "example": "any"
+                },
+                "height": {
+                  "example": "any"
+                },
+                "url": {
+                  "example": "any"
+                },
+                "wave": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Army": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "general": {
+            "type": "string"
+          },
+          "attack": {
+            "type": "number"
+          },
+          "defense": {
+            "type": "number"
+          },
+          "move": {
+            "type": "number"
+          },
+          "range": {
+            "type": "number"
+          },
+          "life": {
+            "type": "number"
+          },
+          "cost": {
+            "type": "number"
+          },
+          "specialPowers": {
+            "type": "string"
+          },
+          "class": {
+            "type": "string"
+          },
+          "species": {
+            "type": "string"
+          },
+          "personality": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          },
+          "wave": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
