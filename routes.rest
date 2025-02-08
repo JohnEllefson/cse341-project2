@@ -96,19 +96,19 @@ GET http://localhost:8080/armies/ HTTP/1.1
 
 
 // Remote host: request all armies
-GET https://cse341-project2-t7en.onrender.com/armies/ HTTP/1.1
+GET https://cse341-project2-kp3h.onrender.com/armies/ HTTP/1.1
 
 
 
 ##############################################################
 // Remote host: request Marro Hive army
-GET https://cse341-project2-t7en.onrender.com/armies/679ff3933d1717094be2c636 HTTP/1.1
+GET https://cse341-project2-kp3h.onrender.com/armies/679ff3933d1717094be2c636 HTTP/1.1
 
 
 
 ##############################################################
 // Remote host: create a new army
-POST https://cse341-project2-t7en.onrender.com/armies HTTP/1.1
+POST https://cse341-project2-kp3h.onrender.com/armies HTTP/1.1
 content-type: application/json
 
 {
@@ -135,13 +135,13 @@ content-type: application/json
 
 ##############################################################
 // Remote host: request all armies to show that TEST Marro Hive BIGGER was added
-GET https://cse341-project2-t7en.onrender.com/armies/ HTTP/1.1
+GET https://cse341-project2-kp3h.onrender.com/armies/ HTTP/1.1
 
 
 
 ##############################################################
 // Remote host: update the TEST Marro Hive BIGGER army to make it smaller
-PUT https://cse341-project2-t7en.onrender.com/armies/67a1301134cc079c3e10ceb9 HTTP/1.1
+PUT https://cse341-project2-kp3h.onrender.com/armies/67a1301134cc079c3e10ceb9 HTTP/1.1
 content-type: application/json
 
 {
@@ -168,16 +168,16 @@ content-type: application/json
 
 ##############################################################
 // Remote host: request all contacts to show that TEST Marro Hive BIGGER was updated to be smaller
-GET https://cse341-project2-t7en.onrender.com/armies/ HTTP/1.1
+GET https://cse341-project2-kp3h.onrender.com/armies/ HTTP/1.1
 
 
 
 ##############################################################
 // Remote host: delete the TEST Marro Hive SMALLER army
-DELETE https://cse341-project2-t7en.onrender.com/armies/67a1301134cc079c3e10ceb9 HTTP/1.1
+DELETE https://cse341-project2-kp3h.onrender.com/armies/67a1301134cc079c3e10ceb9 HTTP/1.1
 
 
 
 ##############################################################
 // Remote host: request all contacts to show that TEST Marro Hive SMALLER was deleted
-GET https://cse341-project2-t7en.onrender.com/armies/ HTTP/1.1
+GET https://cse341-project2-kp3h.onrender.com/armies/ HTTP/1.1
