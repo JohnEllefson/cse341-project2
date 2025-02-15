@@ -8,9 +8,9 @@ const doc = {
     title: 'HeroScape API',
     description: 'This API manages a database of HeroScape figures and their associated data.'
   },
-  host: 'cse341-project2-kp3h.onrender.com',
+  host: 'localhost:8080',
   basePath: '/',
-  schemes: ['https'],
+  schemes: ['http'],
   components: {
     schemas: {
       Army: {

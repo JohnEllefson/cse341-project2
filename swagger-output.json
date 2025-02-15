@@ -1,241 +1,590 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
-    "version": "1.0.0",
     "title": "HeroScape API",
-    "description": "This API manages a database of HeroScape figures and their associated data."
+    "description": "This is an API that accesses the HeroScape database. It allows access to armies, generals, glyphs, and wave release information.\n",
+    "version": "1.0.0"
   },
-  "host": "cse341-project2-kp3h.onrender.com",
-  "basePath": "/",
-  "schemes": [
-    "https"
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Local Host"
+    },
+    {
+      "url": "https://cse341-project2-t7en.onrender.com",
+      "description": "Render Host"
+    }
+  ],
+  "tags": [
+    {
+      "name": "armies",
+      "description": "Access to all of the armies in the database"
+    },
+    {
+      "name": "generals",
+      "description": "Access to all of the generals in the database"
+    },
+    {
+      "name": "waves",
+      "description": "Access to all of the wave releases for Heroscape"
+    },
+    {
+      "name": "glyphs",
+      "description": "Access to all of the glyphs in the database"
+    }
   ],
   "paths": {
-    "/armies/": {
+    "/armies": {
       "get": {
-        "description": "Return all armies in the database.",
-        "produces": [
-          "application/json"
+        "tags": [
+          "armies"
         ],
+        "summary": "Return all armies",
+        "description": "Return all armies in the database",
+        "operationId": "getAllArmies",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Armies found"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Failed to get armies"
           },
           "404": {
-            "description": "Not Found"
+            "description": "No armies found in the database"
           }
         }
       },
       "post": {
-        "description": "Create a new army in the database.",
-        "produces": [
-          "application/json"
+        "tags": [
+          "armies"
         ],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "type": {
-                  "example": "any"
-                },
-                "general": {
-                  "example": "any"
-                },
-                "attack": {
-                  "example": "any"
-                },
-                "defense": {
-                  "example": "any"
-                },
-                "move": {
-                  "example": "any"
-                },
-                "range": {
-                  "example": "any"
-                },
-                "life": {
-                  "example": "any"
-                },
-                "cost": {
-                  "example": "any"
-                },
-                "specialPowers": {
-                  "example": "any"
-                },
-                "class": {
-                  "example": "any"
-                },
-                "species": {
-                  "example": "any"
-                },
-                "personality": {
-                  "example": "any"
-                },
-                "size": {
-                  "example": "any"
-                },
-                "height": {
-                  "example": "any"
-                },
-                "url": {
-                  "example": "any"
-                },
-                "wave": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
+        "summary": "Create a new army",
+        "description": "Create a new army in the database",
+        "operationId": "createSingleArmy",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Armies"
+        },
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "New army created successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Failed to create army"
           }
         }
       }
     },
     "/armies/{id}": {
       "get": {
-        "description": "Return a single army by ID from the database.",
-        "produces": [
-          "application/json"
+        "tags": [
+          "armies"
         ],
+        "summary": "Return a single army",
+        "description": "Return a single army from the database using the army id value",
+        "operationId": "getSingleArmy",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "Id of army to return",
             "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "delete": {
-        "description": "Delete a single army by ID from the database.",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "put": {
-        "description": "Update a single army by ID in the database.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
+            "style": "simple",
+            "explode": false,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "type": {
-                  "example": "any"
-                },
-                "general": {
-                  "example": "any"
-                },
-                "attack": {
-                  "example": "any"
-                },
-                "defense": {
-                  "example": "any"
-                },
-                "move": {
-                  "example": "any"
-                },
-                "range": {
-                  "example": "any"
-                },
-                "life": {
-                  "example": "any"
-                },
-                "cost": {
-                  "example": "any"
-                },
-                "specialPowers": {
-                  "example": "any"
-                },
-                "class": {
-                  "example": "any"
-                },
-                "species": {
-                  "example": "any"
-                },
-                "personality": {
-                  "example": "any"
-                },
-                "size": {
-                  "example": "any"
-                },
-                "height": {
-                  "example": "any"
-                },
-                "url": {
-                  "example": "any"
-                },
-                "wave": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Army found"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid ID supplied"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Army not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "armies"
+        ],
+        "summary": "Update an existing army",
+        "description": "Update a single army from the database using the army id value",
+        "operationId": "updateSingleArmy",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of army to update",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Armies"
+        },
+        "responses": {
+          "204": {
+            "description": "Army updated successfully"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Army not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "armies"
+        ],
+        "summary": "Delete a single army",
+        "description": "Delete a single army from the database using the army id value",
+        "operationId": "deleteSingleArmy",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of army to delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Army deleted"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Army not found"
+          }
+        }
+      }
+    },
+    "/generals": {
+      "get": {
+        "tags": [
+          "generals"
+        ],
+        "summary": "Return all generals",
+        "description": "Return all generals in the database",
+        "operationId": "getAllGenerals",
+        "responses": {
+          "200": {
+            "description": "Generals found"
+          },
+          "400": {
+            "description": "Failed to get generals"
+          },
+          "404": {
+            "description": "No generals found in the database"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "generals"
+        ],
+        "summary": "Create a new general",
+        "description": "Create a new general in the database",
+        "operationId": "createSingleGeneral",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Generals"
+        },
+        "responses": {
+          "201": {
+            "description": "New general created successfully"
+          },
+          "400": {
+            "description": "Failed to create general"
+          }
+        }
+      }
+    },
+    "/generals/{id}": {
+      "get": {
+        "tags": [
+          "generals"
+        ],
+        "summary": "Return a single general",
+        "description": "Return a single general from the database using the general id value",
+        "operationId": "getSingleGeneral",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of general to return",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "General found"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "General not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "generals"
+        ],
+        "summary": "Update an existing general",
+        "description": "Update a single general from the database using the general id value",
+        "operationId": "updateSingleGeneral",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of general to update",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Generals"
+        },
+        "responses": {
+          "204": {
+            "description": "General updated successfully"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "General not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "generals"
+        ],
+        "summary": "Delete a single general",
+        "description": "Delete a single general from the database using the general id value",
+        "operationId": "deleteSingleGeneral",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of general to delete",
+            "required": true,
+            "style": "simple",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "General deleted"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "General not found"
+          }
+        }
+      }
+    },
+    "/waves": {
+      "get": {
+        "tags": [
+          "waves"
+        ],
+        "summary": "Return all waves",
+        "description": "Return all waves in the database",
+        "operationId": "getAllWaves",
+        "responses": {
+          "200": {
+            "description": "Waves found"
+          },
+          "400": {
+            "description": "Failed to get waves"
+          },
+          "404": {
+            "description": "No waves found in the database"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "waves"
+        ],
+        "summary": "Create a new wave",
+        "description": "Create a new wave in the database",
+        "operationId": "createSingleWave",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Waves"
+        },
+        "responses": {
+          "201": {
+            "description": "New wave created successfully"
+          },
+          "400": {
+            "description": "Failed to create wave"
+          }
+        }
+      }
+    },
+    "/waves/{id}": {
+      "get": {
+        "tags": [
+          "waves"
+        ],
+        "summary": "Return a single wave",
+        "description": "Return a single wave from the database using the wave id value",
+        "operationId": "getSingleWave",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of wave to return",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wave found"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Wave not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "waves"
+        ],
+        "summary": "Update an existing wave",
+        "description": "Update a single wave from the database using the wave id value",
+        "operationId": "updateSingleWave",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of wave to update",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Waves"
+        },
+        "responses": {
+          "204": {
+            "description": "Wave updated successfully"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Wave not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "waves"
+        ],
+        "summary": "Delete a single wave",
+        "description": "Delete a single wave from the database using the wave id value",
+        "operationId": "deleteSingleWave",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of wave to delete",
+            "required": true,
+            "style": "simple",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wave deleted"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Wave not found"
+          }
+        }
+      }
+    },
+    "/glyphs": {
+      "get": {
+        "tags": [
+          "glyphs"
+        ],
+        "summary": "Return all glyphs",
+        "description": "Return all glyphs in the database",
+        "operationId": "getAllGlyphs",
+        "responses": {
+          "200": {
+            "description": "Glyphs found"
+          },
+          "400": {
+            "description": "Failed to get glyphs"
+          },
+          "404": {
+            "description": "No glyphs found in the database"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "glyphs"
+        ],
+        "summary": "Create a new glyph",
+        "description": "Create a new glyph in the database",
+        "operationId": "createSingleGlyph",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Glyphs"
+        },
+        "responses": {
+          "201": {
+            "description": "New glyph created successfully"
+          },
+          "400": {
+            "description": "Failed to create glyph"
+          }
+        }
+      }
+    },
+    "/glyphs/{id}": {
+      "get": {
+        "tags": [
+          "glyphs"
+        ],
+        "summary": "Return a single glyph",
+        "description": "Return a single glyph from the database using the glyph id value",
+        "operationId": "getSingleGlyph",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of glyph to return",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Glyph found"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Glyph not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "glyphs"
+        ],
+        "summary": "Update an existing glyph",
+        "description": "Update a single glyph from the database using the glyph id value",
+        "operationId": "updateSingleGlyph",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of glyph to update",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Glyphs"
+        },
+        "responses": {
+          "204": {
+            "description": "Glyph updated successfully"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Glyph not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "glyphs"
+        ],
+        "summary": "Delete a single glyph",
+        "description": "Delete a single glyph from the database using the glyph id value",
+        "operationId": "deleteSingleGlyph",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of glyph to delete",
+            "required": true,
+            "style": "simple",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Glyph deleted"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Glyph not found"
           }
         }
       }
@@ -243,7 +592,7 @@
   },
   "components": {
     "schemas": {
-      "Army": {
+      "Armies": {
         "type": "object",
         "properties": {
           "name": {
@@ -256,22 +605,28 @@
             "type": "string"
           },
           "attack": {
-            "type": "number"
+            "type": "integer",
+            "format": "int32"
           },
           "defense": {
-            "type": "number"
+            "type": "integer",
+            "format": "int32"
           },
           "move": {
-            "type": "number"
+            "type": "integer",
+            "format": "int32"
           },
           "range": {
-            "type": "number"
+            "type": "integer",
+            "format": "int32"
           },
           "life": {
-            "type": "number"
+            "type": "integer",
+            "format": "int32"
           },
           "cost": {
-            "type": "number"
+            "type": "integer",
+            "format": "int32"
           },
           "specialPowers": {
             "type": "string"
@@ -289,13 +644,98 @@
             "type": "string"
           },
           "height": {
-            "type": "number"
+            "type": "integer",
+            "format": "int32"
           },
           "url": {
             "type": "string"
           },
           "wave": {
             "type": "string"
+          }
+        }
+      },
+      "Generals": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "symbol": {
+            "type": "string"
+          }
+        }
+      },
+      "Waves": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Glyphs": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "wave": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "Armies": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Armies"
+            }
+          }
+        }
+      },
+      "Generals": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Generals"
+            }
+          }
+        }
+      },
+      "Waves": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Waves"
+            }
+          }
+        }
+      },
+      "Glyphs": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Glyphs"
+            }
           }
         }
       }

@@ -5,6 +5,8 @@ require('dotenv').config(); // This must load before other modules
 const express = require('express');
 const cors = require('cors');
 const mongodb = require('./db/connect');
+const routes = require('./routes/index');
+const utilites = require('./utilities/index');
 
 // Ensure all Mongoose schemas are registered
 require('./models/army.model');
@@ -18,7 +20,7 @@ const port = process.env.PORT || 8080;
 app.use(cors());
 
 // Mount the body parsing middleware
-app.use(express.json());
+app.use(express.json({ strict: false }));
 app.use(express.urlencoded({ extended: true }));
 
 // All incoming requests will have the response headers set to allow all origins
@@ -28,7 +30,13 @@ app.use('/', (_req, res, next) => {
 });
 
 // All incoming requests are passed through the routes/index.js file
-app.use('/', require('./routes'));
+app.use('/', utilites.handleErrors(routes));
+
+// Global error handler (catch all)
+app.use((err, req, res, _next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Internal server error' });
+});
 
 // Start the server
 const server = app.listen(port, async (_req, _res) => {
