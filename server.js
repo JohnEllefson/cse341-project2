@@ -8,6 +8,10 @@ const mongodb = require('./db/connect');
 const routes = require('./routes/index');
 const utilites = require('./utilities/index');
 
+// Use for development purposes only
+// const jwtSecretGenerator = require('./utilities/jwt-secret-generator');
+// jwtSecretGenerator();
+
 // Ensure all Mongoose schemas are registered
 require('./models/army.model');
 require('./models/general.model');
