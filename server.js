@@ -5,7 +5,6 @@ require('dotenv').config(); // This must load before other modules
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
-const authRoutes = require('./auth/authRoutes');
 const cors = require('cors');
 const mongodb = require('./db/connect');
 const routes = require('./routes/index');
@@ -52,38 +51,8 @@ app.use('/', (_req, res, next) => {
   next();
 });
 
-// Mount the auth routes
-app.use('/auth', authRoutes);
-
 // All incoming requests are passed through the routes/index.js file
 app.use('/', utilites.handleErrors(routes));
-
-// TEST CODE
-
-// Example protected route using JWT
-const jwt = require('jsonwebtoken');
-
-const authenticateJWT = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-
-  if (authHeader) {
-    const token = authHeader.split(' ')[1];
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-      if (err) return res.sendStatus(403);
-      req.user = user;
-      next();
-    });
-  } else {
-    res.sendStatus(401);
-  }
-};
-
-app.get('/protected', authenticateJWT, (req, res) => {
-  res.json({ message: `Hello, ${req.user.username}. You have accessed a protected route!` });
-});
-
-// END OF TEST CODE
 
 // Global error handler (catch all)
 app.use((err, req, res, _next) => {

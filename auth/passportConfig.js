@@ -11,7 +11,6 @@ passport.use(
       callbackURL: '/auth/google/callback'
     },
     (accessToken, refreshToken, profile, done) => {
-      // Here you would typically find or create a user in your database
       const user = {
         googleId: profile.id,
         username: profile.displayName,
