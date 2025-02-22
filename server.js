@@ -10,7 +10,8 @@ const mongodb = require('./db/connect');
 const routes = require('./routes/index');
 const utilites = require('./utilities/index');
 
-// Generate a JWT secret and store it in the .env file
+// Generate a JWT secret and print it to the console.
+// The JWT should then be stored in the .env file.
 // const generateJwtSecret = require('./utilities/jwt-secret-generator');
 // console.log(generateJwtSecret());
 
@@ -21,6 +22,8 @@ require('./auth/passportConfig');
 require('./models/army.model');
 require('./models/general.model');
 require('./models/wave.model');
+require('./models/glyph.model');
+require('./models/user.model');
 
 const app = express();
 const port = process.env.PORT || 3000;
