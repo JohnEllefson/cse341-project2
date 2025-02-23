@@ -29,7 +29,12 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Mount the CORS middleware to allow requests from any origin
-app.use(cors());
+app.use(
+  cors({
+    origin: ['http://localhost:8080', 'https://cse341-project2-kp3h.onrender.com'],
+    credentials: true
+  })
+);
 
 // Mount the body parsing middleware
 app.use(express.json({ strict: false }));
