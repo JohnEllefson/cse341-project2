@@ -8,7 +8,7 @@ const swaggerDocument = require('../swagger-output.json');
 // Determine the base URL dynamically based on environment
 const isProduction = process.env.NODE_ENV === 'production';
 const BASE_URL = isProduction
-  ? 'https://cse341-project2-t7en.onrender.com'
+  ? 'https://cse341-project2-kp3h.onrender.com'
   : 'https://localhost:8443';
 
 // Update Swagger OAuth2 security schema with the correct URLs
