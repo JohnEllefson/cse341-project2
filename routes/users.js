@@ -8,10 +8,10 @@ const usersValidate = require('../utilities/users-validation');
 
 const router = express.Router();
 
-// Return all users (must be logged in to access)
+// Return all users. Admins can see all users, regular users can only see themselves.
 router.get('/', authenticateJWT, utilities.handleErrors(usersController.getAllUsers));
 
-// Return a single user (must be logged in to access)
+// Return a single user. Admins can see all users, regular users can only see themselves.
 router.get(
   '/:id',
   authenticateJWT,
@@ -20,7 +20,7 @@ router.get(
   utilities.handleErrors(usersController.getSingleUser)
 );
 
-// Delete a single user (only accessible by the user or admin)
+// Delete a single user (only accessible by the direct user or admin)
 router.delete(
   '/:id',
   authenticateJWT,
@@ -29,7 +29,7 @@ router.delete(
   utilities.handleErrors(usersController.deleteSingleUser)
 );
 
-// Update user info (only accessible by the user or admin)
+// Update user info (only accessible by the direct user or admin)
 router.put(
   '/:id',
   authenticateJWT,
@@ -39,5 +39,8 @@ router.put(
   usersValidate.checkUser,
   utilities.handleErrors(usersController.updateSingleUser)
 );
+
+// Logout route
+router.post('/logout', authenticateJWT, utilities.handleErrors(usersController.userLogout));
 
 module.exports = router;

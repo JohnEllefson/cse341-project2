@@ -4,6 +4,7 @@
 const express = require('express');
 const armiesController = require('../controllers/armies');
 const armiesValidate = require('../utilities/armies-validation');
+const { authenticateJWT, authorizeRoles } = require('../utilities/authentication');
 const utilities = require('../utilities/index');
 
 // Create a new router
@@ -20,28 +21,34 @@ router.get(
   utilities.handleErrors(armiesController.getSingleArmy)
 );
 
-// Delete a single army
+// Delete a single army (admin only)
 router.delete(
   '/:id',
+  authenticateJWT,
+  authorizeRoles('admin'),
   armiesValidate.idRules(),
   armiesValidate.checkId,
   utilities.handleErrors(armiesController.deleteSingleArmy)
 );
 
-// Create a new army
+// Create a new army (admin and developer only)
 router.post(
   '/',
-  armiesValidate.armyRules(),
+  authenticateJWT,
+  authorizeRoles('admin', 'developer'),
+  armiesValidate.armyAddRules(),
   armiesValidate.checkArmy,
   utilities.handleErrors(armiesController.createSingleArmy)
 );
 
-// Update a single army
+// Update a single army (admin and developer only)
 router.put(
   '/:id',
+  authenticateJWT,
+  authorizeRoles('admin', 'developer'),
   armiesValidate.idRules(),
   armiesValidate.checkId,
-  armiesValidate.armyRules(),
+  armiesValidate.armyUpdateRules(),
   armiesValidate.checkArmy,
   utilities.handleErrors(armiesController.updateSingleArmy)
 );

@@ -27,7 +27,8 @@ export default [
     rules: {
       'no-console': 'warn', // Warn on console usage
       'no-process-exit': 'error', // Disallow process.exit()
-      strict: ['error', 'global'] // Enforce strict mode
+      strict: ['error', 'global'], // Enforce strict mode
+      'linebreak-style': ['error', 'unix'] // Add Linebreak Rule: Enforce LF line endings
     }
   },
 

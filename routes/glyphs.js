@@ -4,6 +4,7 @@
 const express = require('express');
 const glyphController = require('../controllers/glyphs');
 const glyphsValidate = require('../utilities/glyphs-validation');
+const { authenticateJWT, authorizeRoles } = require('../utilities/authentication');
 const utilities = require('../utilities/index');
 
 // Create a new router
@@ -20,28 +21,34 @@ router.get(
   utilities.handleErrors(glyphController.getSingleGlyph)
 );
 
-// Delete a single glyph
+// Delete a single glyph (admin only)
 router.delete(
   '/:id',
+  authenticateJWT,
+  authorizeRoles('admin'),
   glyphsValidate.idRules(),
   glyphsValidate.checkId,
   utilities.handleErrors(glyphController.deleteSingleGlyph)
 );
 
-// Create a new glyph
+// Create a new glyph (admin and developer only)
 router.post(
   '/',
-  glyphsValidate.glyphRules(),
+  authenticateJWT,
+  authorizeRoles('admin', 'developer'),
+  glyphsValidate.glyphAddRules(),
   glyphsValidate.checkGlyph,
   utilities.handleErrors(glyphController.createSingleGlyph)
 );
 
-// Update a single glyph
+// Update a single glyph (admin and developer only)
 router.put(
   '/:id',
+  authenticateJWT,
+  authorizeRoles('admin', 'developer'),
   glyphsValidate.idRules(),
   glyphsValidate.checkId,
-  glyphsValidate.glyphRules(),
+  glyphsValidate.glyphUpdateRules(),
   glyphsValidate.checkGlyph,
   utilities.handleErrors(glyphController.updateSingleGlyph)
 );

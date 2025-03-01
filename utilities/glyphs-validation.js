@@ -22,9 +22,9 @@ glyphsValidate.checkId = (req, res, next) => {
 };
 
 /*************************************
- *  Glyph validation rules
+ *  Create hlyph validation rules
  *************************************/
-glyphsValidate.glyphRules = () => {
+glyphsValidate.glyphAddRules = () => {
   return [
     body('name')
       .trim()
@@ -48,6 +48,45 @@ glyphsValidate.glyphRules = () => {
       .withMessage('Glyph summary must be more than 1 character'),
 
     body('description')
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage('Glyph description must be more than 1 character')
+  ];
+};
+
+/*************************************
+ *  Update hlyph validation rules
+ *************************************/
+glyphsValidate.glyphUpdateRules = () => {
+  return [
+    body('name')
+      .optional()
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage('Glyph name must be more than 1 character'),
+
+    body('wave')
+      .optional()
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage('Glyph wave must be more than 1 character'),
+
+    body('summary')
+      .optional()
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage('Glyph summary must be more than 1 character'),
+
+    body('description')
+      .optional()
       .trim()
       .escape()
       .notEmpty()

@@ -22,9 +22,9 @@ wavesValidate.checkId = (req, res, next) => {
 };
 
 /*************************************
- *  Wave validation rules
+ *  Create wave validation rules
  *************************************/
-wavesValidate.waveRules = () => {
+wavesValidate.waveAddRules = () => {
   return [
     body('name')
       .trim()
@@ -36,6 +36,31 @@ wavesValidate.waveRules = () => {
     body('releaseDate').isISO8601().withMessage('Date must be in ISO 8601 format'),
 
     body('description')
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage('Wave description must be more than 1 character')
+  ];
+};
+
+/*************************************
+ *  Update wave validation rules
+ *************************************/
+wavesValidate.waveUpdateRules = () => {
+  return [
+    body('name')
+      .optional()
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage('Wave name must be more than 1 character'),
+
+    body('releaseDate').optional().isISO8601().withMessage('Date must be in ISO 8601 format'),
+
+    body('description')
+      .optional()
       .trim()
       .escape()
       .notEmpty()

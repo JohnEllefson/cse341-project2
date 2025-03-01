@@ -4,6 +4,7 @@
 const express = require('express');
 const generalsController = require('../controllers/generals');
 const generalsValidate = require('../utilities/generals-validation');
+const { authenticateJWT, authorizeRoles } = require('../utilities/authentication');
 const utilities = require('../utilities/index');
 
 // Create a new router
@@ -20,28 +21,34 @@ router.get(
   utilities.handleErrors(generalsController.getSingleGeneral)
 );
 
-// Delete a single general
+// Delete a single general (admin only)
 router.delete(
   '/:id',
+  authenticateJWT,
+  authorizeRoles('admin'),
   generalsValidate.idRules(),
   generalsValidate.checkId,
   utilities.handleErrors(generalsController.deleteSingleGeneral)
 );
 
-// Create a new general
+// Create a new general (admin and developer only)
 router.post(
   '/',
-  generalsValidate.generalRules(),
+  authenticateJWT,
+  authorizeRoles('admin', 'developer'),
+  generalsValidate.generalAddRules(),
   generalsValidate.checkGeneral,
   utilities.handleErrors(generalsController.createSingleGeneral)
 );
 
-// Update a single general
+// Update a single general (admin and developer only)
 router.put(
   '/:id',
+  authenticateJWT,
+  authorizeRoles('admin', 'developer'),
   generalsValidate.idRules(),
   generalsValidate.checkId,
-  generalsValidate.generalRules(),
+  generalsValidate.generalUpdateRules(),
   generalsValidate.checkGeneral,
   utilities.handleErrors(generalsController.updateSingleGeneral)
 );

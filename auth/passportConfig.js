@@ -10,12 +10,13 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL:
         process.env.NODE_ENV === 'production'
-          ? 'https://cse341-project2-kp3h.onrender.com/auth/google/callback'
-          : 'http://localhost:8080/auth/google/callback'
+          ? process.env.CALLBACK_URL_PROD
+          : process.env.CALLBACK_URL_DEV
     },
     (accessToken, refreshToken, profile, done) => {
       const user = {
         googleId: profile.id,
+        googleAccessToken: accessToken,
         username: profile.displayName,
         email: profile.emails[0].value
       };

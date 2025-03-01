@@ -4,6 +4,7 @@
 const express = require('express');
 const waveController = require('../controllers/waves');
 const wavesValidate = require('../utilities/waves-validation');
+const { authenticateJWT, authorizeRoles } = require('../utilities/authentication');
 const utilities = require('../utilities/index');
 
 // Create a new router
@@ -20,28 +21,34 @@ router.get(
   utilities.handleErrors(waveController.getSingleWave)
 );
 
-// Delete a single wave
+// Delete a single wave (admin only)
 router.delete(
   '/:id',
+  authenticateJWT,
+  authorizeRoles('admin'),
   wavesValidate.idRules(),
   wavesValidate.checkId,
   utilities.handleErrors(waveController.deleteSingleWave)
 );
 
-// Create a new wave
+// Create a new wave (admin and developer only)
 router.post(
   '/',
-  wavesValidate.waveRules(),
+  authenticateJWT,
+  authorizeRoles('admin', 'developer'),
+  wavesValidate.waveAddRules(),
   wavesValidate.checkWave,
   utilities.handleErrors(waveController.createSingleWave)
 );
 
-// Update a single wave
+// Update a single wave (admin and developer only)
 router.put(
   '/:id',
+  authenticateJWT,
+  authorizeRoles('admin', 'developer'),
   wavesValidate.idRules(),
   wavesValidate.checkId,
-  wavesValidate.waveRules(),
+  wavesValidate.waveUpdateRules(),
   wavesValidate.checkWave,
   utilities.handleErrors(waveController.updateSingleWave)
 );

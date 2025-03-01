@@ -22,9 +22,9 @@ generalsValidate.checkId = (req, res, next) => {
 };
 
 /*************************************
- *  General validation rules
+ *  Create general validation rules
  *************************************/
-generalsValidate.generalRules = () => {
+generalsValidate.generalAddRules = () => {
   return [
     body('name')
       .trim()
@@ -41,6 +41,31 @@ generalsValidate.generalRules = () => {
       .withMessage('General background must be more than 1 character'),
 
     body('symbol').isURL().notEmpty().withMessage('Must be a valid URL')
+  ];
+};
+
+/*************************************
+ *  Update general validation rules
+ *************************************/
+generalsValidate.generalUpdateRules = () => {
+  return [
+    body('name')
+      .optional()
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage('General name must be more than 1 character'),
+
+    body('background')
+      .optional()
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage('General background must be more than 1 character'),
+
+    body('symbol').optional().isURL().notEmpty().withMessage('Must be a valid URL')
   ];
 };
 

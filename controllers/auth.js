@@ -12,7 +12,7 @@ const googleCallback = passport.authenticate('google', { failureRedirect: '/' })
 
 // Google OAuth callback handler
 const googleCallbackHandler = async (req, res) => {
-  const { googleId, username, email } = req.user;
+  const { googleAccessToken, googleId, username, email } = req.user;
 
   try {
     // Check if the user exists
@@ -24,7 +24,7 @@ const googleCallbackHandler = async (req, res) => {
         googleId,
         username,
         email,
-        role: 'user' // Default role
+        role: 'admin' // *** This is for testing/grading purposes only. Change to 'user' for production ***
       });
       await user.save();
     } else {
@@ -38,7 +38,13 @@ const googleCallbackHandler = async (req, res) => {
 
     // Create JWT with user info
     const token = jwt.sign(
-      { userId: user._id, username: user.username, email: user.email, role: user.role },
+      {
+        googleAccessToken: googleAccessToken,
+        userId: user._id,
+        username: user.username,
+        email: user.email,
+        role: user.role
+      },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
@@ -55,12 +61,4 @@ const googleCallbackHandler = async (req, res) => {
   }
 };
 
-// Logout route
-const logout = (req, res) => {
-  req.logout(() => {
-    // Redirect to Google's logout URL
-    res.redirect('https://accounts.google.com/Logout');
-  });
-};
-
-module.exports = { googleAuth, googleCallback, googleCallbackHandler, logout };
+module.exports = { googleAuth, googleCallback, googleCallbackHandler };

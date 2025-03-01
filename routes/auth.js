@@ -16,7 +16,4 @@ router.get(
   utilities.handleErrors(authController.googleCallbackHandler)
 );
 
-// Logout route
-router.get('/logout', utilities.handleErrors(authController.logout));
-
 module.exports = router;
