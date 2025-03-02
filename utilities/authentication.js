@@ -33,14 +33,6 @@ const authenticateJWT = async (req, res, next) => {
   }
 };
 
-// Middleware to check roles
-const checkRole = (role) => {
-  return (req, res, next) => {
-    if (req.user.role === role || req.user.role === 'admin') return next();
-    res.status(403).json({ message: 'Access denied' });
-  };
-};
-
 // Middleware for role-based protection
 const authorizeRoles = (...allowedRoles) => {
   return (req, res, next) => {
@@ -51,4 +43,4 @@ const authorizeRoles = (...allowedRoles) => {
   };
 };
 
-module.exports = { authenticateJWT, checkRole, authorizeRoles };
+module.exports = { authenticateJWT, authorizeRoles };

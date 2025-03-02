@@ -10,8 +10,8 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL:
         process.env.NODE_ENV === 'production'
-          ? process.env.CALLBACK_URL_PROD
-          : process.env.CALLBACK_URL_DEV
+          ? `${process.env.REMOTE_BASE_URL}/auth/google/callback`
+          : `${process.env.LOCAL_BASE_URL}/auth/google/callback`
     },
     (accessToken, refreshToken, profile, done) => {
       const user = {
